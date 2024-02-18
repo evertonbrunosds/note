@@ -50,4 +50,7 @@ public class UserprofileEntity {
     @OneToOne(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = REMOVE)
     private VerifyEmailEntity verifyEmail;
 
+    @OneToOne(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = REMOVE)
+    private ChangePasswordEntity changePassword;
+
 }
