@@ -1,9 +1,6 @@
 package github.com.evertonbrunosds.note.model.entity;
 
-import static jakarta.persistence.CascadeType.REMOVE;
-
-import java.util.LinkedList;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -14,14 +11,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "kind", schema = "public")
-public class KindEntity {
+@Table(name = "note", schema = "public")
+public class NoteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,13 +25,16 @@ public class KindEntity {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userprofile_id", referencedColumnName = "id", updatable = false, nullable = false)
-    private UserprofileEntity userprofile;
+    @JoinColumn(name = "kind_id", referencedColumnName = "id", updatable = false, nullable = false)
+    private KindEntity kind;
 
-    @Column(name = "name", length = 32, nullable = false)
-    private String name;
+    @Column(name = "title", length = 32, nullable = false)
+    private String title;
 
-    @OneToMany(mappedBy = "kind", fetch = FetchType.LAZY, cascade = REMOVE)
-    private List<NoteEntity> notes = new LinkedList<>();
+    @Column(name = "content", nullable = false)
+    private String content;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
 }
