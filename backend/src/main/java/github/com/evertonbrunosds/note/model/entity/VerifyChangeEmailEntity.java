@@ -1,7 +1,5 @@
 package github.com.evertonbrunosds.note.model.entity;
 
-import static jakarta.persistence.CascadeType.REMOVE;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -18,8 +16,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "change_email", schema = "public")
-public class ChangeEmailEntity {
+@Table(name = "verify_change_email", schema = "public")
+public class VerifyChangeEmailEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,19 +25,13 @@ public class ChangeEmailEntity {
     private UUID id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userprofile_id", referencedColumnName = "id", updatable = false, nullable = false, unique = true)
-    private UserprofileEntity userprofile;
-
-    @Column(name = "email", length = 256, nullable = false, unique = true)
-    private String email;
+    @JoinColumn(name = "change_email_id", referencedColumnName = "id", updatable = false, nullable = false, unique = true)
+    private ChangeEmailEntity changeEmail;
 
     @Column(name = "activation_key", length = 192, nullable = false)
     private String activationKey;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    @OneToOne(mappedBy = "changeEmail", fetch = FetchType.LAZY, cascade = REMOVE)
-    private VerifyChangeEmailEntity verifyChangeEmail;
 
 }
