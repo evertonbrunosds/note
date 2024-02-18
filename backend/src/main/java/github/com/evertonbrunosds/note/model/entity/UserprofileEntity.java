@@ -4,6 +4,8 @@ import static jakarta.persistence.CascadeType.REMOVE;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -12,6 +14,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -55,5 +58,8 @@ public class UserprofileEntity {
 
     @OneToOne(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = REMOVE)
     private ChangeEmailEntity changeEmail;
+
+    @OneToMany(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = REMOVE)
+    private List<KindEntity> kinds = new LinkedList<>();
 
 }
