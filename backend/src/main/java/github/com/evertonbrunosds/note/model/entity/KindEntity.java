@@ -1,11 +1,10 @@
 package github.com.evertonbrunosds.note.model.entity;
 
-import static jakarta.persistence.CascadeType.REMOVE;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,7 +34,7 @@ public class KindEntity {
     @Column(name = "name", length = 32, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "kind", fetch = FetchType.LAZY, cascade = REMOVE)
+    @OneToMany(mappedBy = "kind", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<NoteEntity> notes = new LinkedList<>();
 
 }

@@ -1,13 +1,12 @@
 package github.com.evertonbrunosds.note.model.entity;
 
-import static jakarta.persistence.CascadeType.REMOVE;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -50,16 +49,16 @@ public class UserprofileEntity {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToOne(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = REMOVE)
+    @OneToOne(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private VerifyEmailEntity verifyEmail;
 
-    @OneToOne(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = REMOVE)
+    @OneToOne(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private ChangePasswordEntity changePassword;
 
-    @OneToOne(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = REMOVE)
+    @OneToOne(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private ChangeEmailEntity changeEmail;
 
-    @OneToMany(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = REMOVE)
+    @OneToMany(mappedBy = "userprofile", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<KindEntity> kinds = new LinkedList<>();
 
 }

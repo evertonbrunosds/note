@@ -1,10 +1,9 @@
 package github.com.evertonbrunosds.note.model.entity;
 
-import static jakarta.persistence.CascadeType.REMOVE;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -39,7 +38,7 @@ public class ChangeEmailEntity {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToOne(mappedBy = "changeEmail", fetch = FetchType.LAZY, cascade = REMOVE)
+    @OneToOne(mappedBy = "changeEmail", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private VerifyChangeEmailEntity verifyChangeEmail;
 
 }
