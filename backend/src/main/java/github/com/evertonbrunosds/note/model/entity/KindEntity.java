@@ -1,9 +1,11 @@
 package github.com.evertonbrunosds.note.model.entity;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import github.com.evertonbrunosds.note.util.Constant;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,8 +21,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "kind", schema = "public")
-public class KindEntity {
+@Table(name = "kind", schema = Constant.Schema.current)
+public class KindEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,8 +1,10 @@
 package github.com.evertonbrunosds.note.model.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import github.com.evertonbrunosds.note.util.Constant;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,8 +18,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "note", schema = "public")
-public class NoteEntity {
+@Table(name = "note", schema = Constant.Schema.current)
+public class NoteEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

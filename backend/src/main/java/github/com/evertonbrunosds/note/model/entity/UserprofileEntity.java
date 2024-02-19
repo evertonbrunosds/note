@@ -1,11 +1,13 @@
 package github.com.evertonbrunosds.note.model.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import github.com.evertonbrunosds.note.util.Constant;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,8 +22,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "userprofile", schema = "public")
-public class UserprofileEntity {
+@Table(name = "userprofile", schema = Constant.Schema.current)
+public class UserprofileEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
