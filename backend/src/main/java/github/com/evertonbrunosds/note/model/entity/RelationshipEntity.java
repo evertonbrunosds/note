@@ -49,6 +49,7 @@ public class RelationshipEntity implements Serializable {
     private LocalDateTime createdAt;
 
     public RelationshipEntity() {
+        state = RelationshipState.PENDING;
         createdAt = currentLocalDateTime();
     }
 
