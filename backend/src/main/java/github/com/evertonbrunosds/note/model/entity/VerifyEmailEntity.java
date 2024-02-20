@@ -1,5 +1,7 @@
 package github.com.evertonbrunosds.note.model.entity;
 
+import static github.com.evertonbrunosds.note.util.LocalDateTimeManager.currentLocalDateTime;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -14,13 +16,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 
 @Data
 @Entity
 @Table(name = "verify_email", schema = Constant.Schema.current)
 public class VerifyEmailEntity implements Serializable {
 
+    @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false, unique = true)
@@ -33,7 +38,12 @@ public class VerifyEmailEntity implements Serializable {
     @Column(name = "activation_key", length = 192, nullable = false)
     private String activationKey;
 
+    @Setter(AccessLevel.NONE)
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    public VerifyEmailEntity() {
+        createdAt = currentLocalDateTime();
+    }
 
 }

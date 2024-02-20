@@ -17,13 +17,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
+
 
 @Data
 @Entity
 @Table(name = "kind", schema = Constant.Schema.current)
 public class KindEntity implements Serializable {
 
+    @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false, unique = true)
@@ -36,6 +40,7 @@ public class KindEntity implements Serializable {
     @Column(name = "name", length = 32, nullable = false)
     private String name;
 
+    @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "kind", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<NoteEntity> notes = new LinkedList<>();
 
