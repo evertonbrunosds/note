@@ -78,10 +78,10 @@ public class UserprofileEntity implements Serializable {
     private List<KindEntity> kinds = new LinkedList<>();
 
     @OneToMany(mappedBy = "follower", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<RelationshipEntity> relationshipsMadeByMe = new LinkedList<>();
+    private List<RelationshipEntity> relationshipsFollower = new LinkedList<>();
 
     @OneToMany(mappedBy = "followed", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<RelationshipEntity> relationshipsMadeBySomeone = new LinkedList<>();
+    private List<RelationshipEntity> relationshipsFollowed = new LinkedList<>();
 
     public UserprofileEntity() {
         createdAt = currentLocalDateTime();
