@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import github.com.evertonbrunosds.note.util.Constant;
+import github.com.evertonbrunosds.note.setting.Constant;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,16 +16,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
-@Data
+@Getter
 @Entity
 @Table(name = "note", schema = Constant.Schema.current)
 public class NoteEntity implements Serializable {
 
-    @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false, unique = true)
@@ -35,17 +33,23 @@ public class NoteEntity implements Serializable {
     @JoinColumn(name = "kind_id", referencedColumnName = "id", updatable = false, nullable = false)
     private KindEntity kind;
 
+    @Setter
     @Column(name = "title", length = 32, nullable = false)
     private String title;
 
+    @Setter
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Setter(AccessLevel.NONE)
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @Deprecated
     public NoteEntity() {
+    }
+
+    public NoteEntity(final KindEntity kind) {
+        this.kind = kind;
         createdAt = currentLocalDateTime();
     }
 

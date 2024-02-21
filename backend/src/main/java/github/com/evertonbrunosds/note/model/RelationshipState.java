@@ -1,4 +1,4 @@
-package github.com.evertonbrunosds.note.util;
+package github.com.evertonbrunosds.note.model;
 
 public enum RelationshipState {
 

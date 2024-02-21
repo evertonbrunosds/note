@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import github.com.evertonbrunosds.note.model.RelationshipState;
 import github.com.evertonbrunosds.note.model.entity.id.RelationshipEntityId;
-import github.com.evertonbrunosds.note.util.Constant;
-import github.com.evertonbrunosds.note.util.RelationshipState;
+import github.com.evertonbrunosds.note.setting.Constant;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -42,33 +42,24 @@ public class RelationshipEntity implements Serializable {
 
     @Setter
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
-    @Column(name = "status", columnDefinition = "relationship_state", nullable = false)
+    @Column(name = "state", columnDefinition = "relationship_state", nullable = false)
     private RelationshipState state;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @Deprecated
     public RelationshipEntity() {
+    }
+
+    public RelationshipEntity(final UserprofileEntity follower, final UserprofileEntity followed) {
+        final var builderId = RelationshipEntityId.builder();
+        builderId.followerId(follower.getId()).followedId(followed.getId());
+        id = builderId.build();
+        this.follower = follower;
+        this.followed = followed;
         state = RelationshipState.PENDING;
         createdAt = currentLocalDateTime();
-    }
-
-    public void setFollower(final UserprofileEntity follower) {
-        this.follower = follower;
-        refreshId();
-    }
-
-    public void setFollowed(final UserprofileEntity followed) {
-        this.followed = followed;
-        refreshId();
-    }
-
-    private synchronized void refreshId() {
-        final var followerId = follower != null ? follower.getId() : null;
-        final var followedId = followed != null ? followed.getId() : null;
-        final var builderId = RelationshipEntityId.builder();
-        builderId.followerId(followerId).followedId(followedId);
-        id = builderId.build();
     }
 
 }

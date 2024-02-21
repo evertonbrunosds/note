@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import github.com.evertonbrunosds.note.util.Constant;
+import github.com.evertonbrunosds.note.setting.Constant;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,17 +17,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
-
-@Data
+@Getter
 @Entity
 @Table(name = "kind", schema = Constant.Schema.current)
 public class KindEntity implements Serializable {
 
-    @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false, unique = true)
@@ -37,11 +34,19 @@ public class KindEntity implements Serializable {
     @JoinColumn(name = "userprofile_id", referencedColumnName = "id", updatable = false, nullable = false)
     private UserprofileEntity userprofile;
 
+    @Setter
     @Column(name = "name", length = 32, nullable = false)
     private String name;
 
-    @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "kind", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<NoteEntity> notes = new LinkedList<>();
+
+    @Deprecated
+    public KindEntity() {
+    }
+
+    public KindEntity(final UserprofileEntity userprofile) {
+        this.userprofile = userprofile;
+    }
 
 }
