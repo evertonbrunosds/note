@@ -1,7 +1,8 @@
 CREATE TABLE kind (
     id uuid not null default uuid_generate_v4() PRIMARY KEY,
     userprofile_id uuid not null,
-    name varchar(32) not null
+    name varchar(32) not null,
+    hidden boolean not null
 );
 
 CREATE TABLE change_password (
@@ -36,7 +37,6 @@ CREATE TABLE userprofile (
     birthday date not null,
     password char(60) not null check(length(password) = 60),
     created_at timestamp with time zone not null default current_timestamp,
-    state userprofile_state not null,
     UNIQUE (username, email)
 );
 

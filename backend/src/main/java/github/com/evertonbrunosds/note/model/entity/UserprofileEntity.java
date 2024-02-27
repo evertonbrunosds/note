@@ -10,10 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
-
-import github.com.evertonbrunosds.note.model.UserprofileState;
 import github.com.evertonbrunosds.note.setting.Constant;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -52,11 +48,6 @@ public class UserprofileEntity implements Serializable {
     private String caption;
 
     @Setter
-    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
-    @Column(name = "state", columnDefinition = "userprofile_state", nullable = false)
-    private UserprofileState state;
-
-    @Setter
     @Column(name = "description", columnDefinition = "text")
     private String description;
 
@@ -92,12 +83,7 @@ public class UserprofileEntity implements Serializable {
     @OneToMany(mappedBy = "followed", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<RelationshipEntity> relationshipsFollowed = new LinkedList<>();
 
-    @Deprecated
     public UserprofileEntity() {
-    }
-
-    public UserprofileEntity(final UserprofileState state) {
-        this.state = state;
         createdAt = currentLocalDateTime();
     }
 

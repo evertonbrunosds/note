@@ -38,6 +38,10 @@ public class KindEntity implements Serializable {
     @Column(name = "name", length = 32, nullable = false)
     private String name;
 
+    @Setter
+    @Column(name = "hidden", nullable = false)
+    private Boolean hidden;
+
     @OneToMany(mappedBy = "kind", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<NoteEntity> notes = new LinkedList<>();
 
@@ -45,8 +49,9 @@ public class KindEntity implements Serializable {
     public KindEntity() {
     }
 
-    public KindEntity(final UserprofileEntity userprofile) {
+    public KindEntity(final UserprofileEntity userprofile, final Boolean hidden) {
         this.userprofile = userprofile;
+        this.hidden = hidden;
     }
 
 }
